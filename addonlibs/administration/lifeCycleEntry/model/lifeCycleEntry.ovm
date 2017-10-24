@@ -2,17 +2,16 @@
 #include "identification.ovm"
 
 LIBRARY lifeCycleEntry
-    VERSION   = "V0.1 (DD-Mon-YYYY)";
-    AUTHOR    = "";
-    COPYRIGHT = "";
-    COMMENT   = "";
-    
+	VERSION   = "V0.1 (DD-Mon-YYYY)";
+	AUTHOR    = "";
+	COPYRIGHT = "";
+	COMMENT   = "";    
     /**
         Documentation of LifeCycleEntry.
         @note Javadoc syntax is allowed here.
         @attention Changes in this file will only generate new code in ./source/sourcetemplates/. Code in ./source/ is not overwritten. 
     */
-    CLASS LifeCycleEntry : CLASS ov/object
+    CLASS LifeCycleEntry : CLASS ov/domain
         IS_INSTANTIABLE;
         VARIABLES
             CreatingInstanceIdString  : STRING INITIALVALUE    =   "";
@@ -57,7 +56,21 @@ LIBRARY lifeCycleEntry
             getLastLCEs: C_FUNCTION <LCE_FNC_GETLASTLCES>;
             setLCE     : C_FUNCTION <LCE_FNC_SETLCE>;
         END_OPERATIONS;
+    END_CLASS; 
+    
+    CLASS LifeCycleEntryData : CLASS ov/domain
+        VARIABLES
+            testVar           :   UINT INITIALVALUE = 0;
+        END_VARIABLES;
+        OPERATIONS
+        END_OPERATIONS;
     END_CLASS;
 
     
+    ASSOCIATION attachdatapackage : ONE_TO_MANY
+    	PARENT parentlce   : CLASS lifeCycleEntry/LifeCycleEntry;
+        CHILD datapackage  : CLASS lifeCycleEntry/LifeCycleEntryData;
+    END_ASSOCIATION;
+
+	
 END_LIBRARY;
