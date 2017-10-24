@@ -1,0 +1,41 @@
+#include "ov.ovm"
+#include "lifeCycleEntry.ovm"
+
+LIBRARY lceSeriesOfMeasurement
+	VERSION   = "V0.1 (DD-Mon-YYYY)";
+	AUTHOR    = "";
+	COPYRIGHT = "";
+	COMMENT   = "";
+	
+	/**
+		Documentation of SeriesOfMeasurement.
+		@note Javadoc syntax is allowed here.
+		@attention Changes in this file will only generate new code in ./source/sourcetemplates/. Code in ./source/ is not overwritten. 
+	*/
+	CLASS SeriesOfMeasurement : CLASS lifeCycleEntry/LifeCycleEntryData
+		IS_INSTANTIABLE;
+		VARIABLES
+			description              :   STRING COMMENT = "define purpose and parameter of SOM here" INITIALVALUE = "";
+			measuringMethod          :   STRING COMMENT = "description of method" INITIALVALUE = "";
+            repetitions              :   UINT COMMENT = "number of repetitions";
+            interval                 :   STRING COMMENT = "define the interval of the parameter between two measurements" INITIALVALUE = "";
+            duration                 :   TIME COMMENT = "duration of measurement series";
+            surroundConditions       :   ANY COMMENT = "define the surrounding conditions here";
+			data                     :   ANY COMMENT = "data of measurement series";
+			unit                     :   STRING COMMENT = "unit of data" INITIALVALUE = "";
+		END_VARIABLES;
+		OPERATIONS
+			constructor : C_FUNCTION <OV_FNC_CONSTRUCTOR>;
+		END_OPERATIONS;
+	END_CLASS;
+	
+	/**
+		Add associations and their documentation here.
+		Association syntax is:
+	*/
+	//ASSOCIATION assocName : ONE_TO_MANY
+	//	PARENT parentVarName : CLASS ov/object;
+	//	CHILD  childVarName : CLASS ov/object;
+	//END_ASSOCIATION;
+	
+END_LIBRARY;
